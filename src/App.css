@@ -1,0 +1,68 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #f5f6fa;
+  padding: 10px;
+}
+
+.app-left {
+  flex: 0.9;
+}
+
+.app-right-table .MuiPaper-root {
+  padding: 4px;
+}
+
+.table-title {
+  text-align: center;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-row:nth-child(even) {
+  background-color: #f3f2f8;
+}
+
+.table-data {
+  padding: 2.5px;
+}
+
+.table {
+  height: 400px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.table::-webkit-scrollbar {
+  display: none;
+}
+
+.chart-container {
+  margin-top: 10px;
+}
+
+.chart-container canvas {
+  height: 250px !important;
+  width: 500px !important;
+}
+
+.app-infoboxes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.box {
+  padding: 15px;
+  min-width: 10vw;
+}
