@@ -65,4 +65,17 @@
 .box {
   padding: 15px;
   min-width: 10vw;
+  cursor: pointer;
+}
+
+.activeBoxCases {
+  border-top: 5px solid crimson;
+}
+
+.recoveredCases {
+  border-top: 5px solid limegreen;
+}
+
+.deathCases {
+  border-top: 5px solid darkgray;
 }

@@ -9,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [activeBox, setActiveBox] = useState("Coronavirus Cases");
   const [infoboxData, setInfoBoxData] = useState({
     todayCases: null,
     todayRecovered: null,
@@ -16,6 +17,7 @@ function App() {
     totalCases: null,
     totalRecovery: null,
     totalDeaths: null,
+    lastUpdated: null,
   });
   const [tableData, setTableData] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("worldwide");
@@ -43,6 +45,7 @@ function App() {
             todayCases,
             todayDeaths,
             todayRecovered,
+            updated,
           } = data;
           setInfoBoxData({
             todayCases,
@@ -51,6 +54,7 @@ function App() {
             totalCases: cases,
             totalDeaths: deaths,
             totalRecovery: recovered,
+            lastUpdated: updated,
           });
         });
     } else {
@@ -65,6 +69,7 @@ function App() {
         todayCases,
         todayDeaths,
         todayRecovered,
+        updated,
       } = selectedCountryData[0];
       setInfoBoxData({
         todayCases,
@@ -73,6 +78,7 @@ function App() {
         totalCases: cases,
         totalDeaths: deaths,
         totalRecovery: recovered,
+        lastUpdated: updated,
       });
     }
   }, [selectedCountry]);
@@ -114,16 +120,25 @@ function App() {
           </div>
           <div className="app-infoboxes">
             <Infoboxes
+              handleOnClick={(title) => setActiveBox(title)}
+              isActive={activeBox}
+              lastUpdated={infoboxData.lastUpdated}
               title="Coronavirus Cases"
               cases={infoboxData.todayCases}
               total={infoboxData.totalCases}
             />
             <Infoboxes
+              handleOnClick={(title) => setActiveBox(title)}
+              isActive={activeBox}
+              lastUpdated={infoboxData.lastUpdated}
               title="Recovered"
               cases={infoboxData.todayRecovered}
               total={infoboxData.totalRecovery}
             />
             <Infoboxes
+              handleOnClick={(title) => setActiveBox(title)}
+              isActive={activeBox}
+              lastUpdated={infoboxData.lastUpdated}
               title="Deaths"
               cases={infoboxData.todayDeaths}
               total={infoboxData.totalDeaths}
@@ -138,7 +153,6 @@ function App() {
           <Linechart countryType={selectedCountry} />
         </div>
       </div>
-      <div style={{ height: "100vh", marginTop: "10vh" }}>Vaccine info</div>
     </>
   );
 }
