@@ -1,4 +1,5 @@
 import { Card, Typography } from "@material-ui/core";
+import { FaCaretUp } from "react-icons/fa";
 import numeral from "numeral";
 const moment = require("moment");
 
@@ -35,7 +36,37 @@ function Infobox(props) {
           variant="subtitle1"
           color="textPrimary"
         >
-          +{numeral(cases).format("0,0")}
+          {title === "Coronavirus Cases" && (
+            <FaCaretUp
+              style={{
+                color: "red",
+                fontSize: "20px",
+                position: "relative",
+                top: "2px",
+              }}
+            />
+          )}
+          {title === "Recovered" && (
+            <FaCaretUp
+              style={{
+                color: "green",
+                fontSize: "20px",
+                position: "relative",
+                top: "2px",
+              }}
+            />
+          )}
+          {title === "Deaths" && (
+            <FaCaretUp
+              style={{
+                color: "darkgray",
+                fontSize: "20px",
+                position: "relative",
+                top: "2px",
+              }}
+            />
+          )}
+          {numeral(cases).format("0,0")}
         </Typography>
         <Typography variant="subtitle1" color="textPrimary">{`Total : ${numeral(
           total

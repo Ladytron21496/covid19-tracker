@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import numeral from "numeral";
 import { Card } from "@material-ui/core";
 
 const options = {
@@ -28,9 +27,14 @@ const buildChartData = (data, casesType) => {
   return chartData;
 };
 
-function LineGraph({ casesType = "cases", countryType = "worldwide" }) {
+function LineGraph({
+  casesType = "cases",
+  countryType = "worldwide",
+  title = "Coronavirus Cases",
+}) {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [backGroundColor, setBackGroundColor] = useState("crimson");
 
   useEffect(() => {
     setLoading(true);
@@ -56,6 +60,14 @@ function LineGraph({ casesType = "cases", countryType = "worldwide" }) {
 
     fetchData();
     setLoading(false);
+
+    if (title === "Coronavirus Cases") {
+      setBackGroundColor("crimson");
+    } else if (title === "Recovered") {
+      setBackGroundColor("limegreen");
+    } else if (title === "Deaths") {
+      setBackGroundColor("darkgray");
+    }
   }, [casesType, countryType]);
 
   return (
@@ -70,8 +82,8 @@ function LineGraph({ casesType = "cases", countryType = "worldwide" }) {
                 data={{
                   datasets: [
                     {
-                      backgroundColor: "rgba(204, 16, 52, 0.5)",
-                      borderColor: "#CC1034",
+                      backgroundColor: backGroundColor,
+                      borderColor: backGroundColor,
                       data: data,
                     },
                   ],

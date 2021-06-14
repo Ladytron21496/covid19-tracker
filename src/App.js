@@ -3,8 +3,10 @@ import FormControl from "@material-ui/core/FormControl";
 import Infoboxes from "./infoboxes";
 import Select from "@material-ui/core/Select";
 import Linechart from "./chart";
+import News from "./news";
 import Table from "./table";
 import { useEffect, useState } from "react";
+import Map from "./map";
 import "./App.css";
 
 function App() {
@@ -21,6 +23,17 @@ function App() {
   });
   const [tableData, setTableData] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("worldwide");
+  const [cords, setCords] = useState([50, 20]);
+
+  function getCasesType() {
+    if (activeBox === "Coronavirus Cases") {
+      return "cases";
+    } else if (activeBox === "Recovered") {
+      return "recovered";
+    } else {
+      return "deaths";
+    }
+  }
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/countries")
@@ -57,6 +70,7 @@ function App() {
             lastUpdated: updated,
           });
         });
+      setCords([50, 20]);
     } else {
       let selectedCountryData = tableData.filter((item) => {
         return item.country === selectedCountry;
@@ -70,6 +84,7 @@ function App() {
         todayDeaths,
         todayRecovered,
         updated,
+        countryInfo,
       } = selectedCountryData[0];
       setInfoBoxData({
         todayCases,
@@ -80,6 +95,10 @@ function App() {
         totalRecovery: recovered,
         lastUpdated: updated,
       });
+
+      let { lat, long } = countryInfo;
+      let cords = [lat, long];
+      setCords(cords);
     }
   }, [selectedCountry]);
 
@@ -144,14 +163,29 @@ function App() {
               total={infoboxData.totalDeaths}
             />
           </div>
+          <div className="app-map">
+            <Map
+              active={activeBox}
+              activeCountry={selectedCountry}
+              countryData={countries}
+              cords={cords}
+            />
+          </div>
         </div>
         <div className="app-right">
           <div className="app-right-table">
             <Table tableData={tableData} />
           </div>
 
-          <Linechart countryType={selectedCountry} />
+          <Linechart
+            title={activeBox}
+            casesType={getCasesType()}
+            countryType={selectedCountry}
+          />
         </div>
+      </div>
+      <div className="news-app">
+        <News />
       </div>
     </>
   );
