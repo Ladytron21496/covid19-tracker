@@ -53,8 +53,8 @@
 }
 
 .chart-container canvas {
-  height: 250px !important;
-  width: 500px !important;
+  height: 250px;
+  width: 500px;
 }
 
 .app-infoboxes {
@@ -174,4 +174,52 @@
 
 .news-button:hover {
   background-color: green;
+}
+
+@media only screen and (max-width: 1000px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .news-container {
+    grid-template-columns: auto auto;
+  }
+
+  .chart-container canvas {
+    height: revert;
+    width: revert;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .app-infoboxes {
+    flex-direction: column;
+  }
+
+  .app-infoboxes > div {
+    margin-bottom: 2.5vh;
+  }
+
+  .news-container {
+    grid-template-columns: auto;
+  }
+
+  .chart-container {
+    margin-top: 4.5vh;
+  }
+
+  .app-right-table,
+  .app-map {
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+  }
+
+  .chart-container canvas {
+    height: revert;
+    width: revert;
+  }
 }
