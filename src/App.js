@@ -47,7 +47,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (selectedCountry === "worldwide") {
+    if (selectedCountry.toLocaleLowerCase() === "worldwide") {
       fetch("https://disease.sh/v3/covid-19/all")
         .then((res) => res.json())
         .then((data) => {
@@ -69,13 +69,13 @@ function App() {
             totalRecovery: recovered,
             lastUpdated: updated,
           });
+          setCords([50, 20]);
         });
-      setCords([50, 20]);
     } else {
       let selectedCountryData = tableData.filter((item) => {
         return item.country === selectedCountry;
       });
-      console.log("this is selected country data", selectedCountryData);
+      
       let {
         cases,
         deaths,

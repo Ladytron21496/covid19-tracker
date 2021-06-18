@@ -21,6 +21,7 @@ export default function News() {
         {newsData.map((item) => {
           return (
             <Newscard
+              key={item.webUrl}
               webUrl={item.webUrl}
               trailText={item.fields.trailText}
               title={item.fields.headline}

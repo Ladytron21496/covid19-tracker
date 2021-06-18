@@ -28,11 +28,12 @@ const circleType = {
 function ChangeView({ center, zoom, changedItem }) {
   const map = useMap();
   if (changedItem.toLowerCase() === "worldwide") {
-    map.setView(center, 3);
+    map.setView(center, 4.5);
+    return null;
+  } else {
+    map.setView(center, 4.5);
     return null;
   }
-  map.setView(center, zoom);
-  return null;
 }
 
 function circleMaker(countryData, active) {
@@ -100,35 +101,27 @@ function circleMaker(countryData, active) {
     if (item.country === "India") openPopup = true;
     let { lat, long } = countryInfo;
     return (
-      <Circledata
-        openPopup={openPopup}
-        active={active}
-        lat={lat}
-        long={long}
-        item={item}
-        casesType={item[casesType]}
-        multiplier={multiplier}
-        color={color}
-      />
-      // <Circle
-      //   ref={markerRef}
-      //   pathOptions={{
-      //     color: color,
-      //     fillColor: color,
-      //   }}
-      //   center={[lat, long]}
-      //   radius={Math.sqrt(item[casesType] * multiplier) * 1.2}
-      // >
-      //   <Popup>
-      //     <div className="popup-container">
-      //       <div className="popup-left">
-      //         <img className="popup-flag" src={countryInfo.flag}></img>
-      //         <p style={{ margin: "5px 0px 0px 0px" }}>{item.country}</p>
-      //       </div>
-      //       <div className="popup-right">{GeneratePopUpData(item)}</div>
-      //     </div>
-      //   </Popup>
-      // </Circle>
+      <>
+        <Circle
+          key={item.country}
+          pathOptions={{
+            color: color,
+            fillColor: color,
+          }}
+          center={[lat, long]}
+          radius={Math.sqrt(item[casesType] * multiplier) * 1.2}
+        >
+          <Popup>
+            <div className="popup-container">
+              <div className="popup-left">
+                <img className="popup-flag" src={countryInfo.flag}></img>
+                <p style={{ margin: "5px 0px 0px 0px" }}>{item.country}</p>
+              </div>
+              <div className="popup-right">{GeneratePopUpData(item)}</div>
+            </div>
+          </Popup>
+        </Circle>
+      </>
     );
   });
 

@@ -196,6 +196,9 @@
     flex-direction: column;
   }
 
+  .MuiFormControl-root {
+    min-width: revert !important;
+  }
   .app-infoboxes {
     flex-direction: column;
   }
